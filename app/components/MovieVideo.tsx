@@ -2,7 +2,7 @@ import prisma from "../utils/db";
 import { Button } from "@/components/ui/button";
 
 async function getData() {
-    const data = await prisma.movie.findFirst({
+    const data = await prisma?.movie.findFirst({
         select: {
             title: true,
             overview: true,
