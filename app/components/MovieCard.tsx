@@ -1,5 +1,10 @@
+"use client";
+
+
 import { Button } from "@/components/ui/button";
 import { Heart, PlayCircle } from "lucide-react";
+import PlayVideoModal from "./PlayVideoModal";
+import { useState } from "react";
 
 interface iAppProps {
     title: string;
@@ -15,9 +20,12 @@ interface iAppProps {
 
 
 export function MovieCard({movieId, title, overview, watchList, watchlistId, youtubeUrl, age, time, year}: iAppProps) {
+
+    const [open, setOpen] = useState(false);
+
     return (
     <>
-        <button className="-mt-14">
+        <button onClick={() => setOpen(true)} className="-mt-14">
             <PlayCircle className="h-20 w-20" />
         </button>
         <div className="right-5 top-5 absolute z-10">
@@ -42,8 +50,9 @@ export function MovieCard({movieId, title, overview, watchList, watchlistId, you
                 <p className="font-normal text-sm border py-0.5 px-1 border-gray-200 rounded">{age}+</p>
                 <p className="font-normal text-sm">{time}h</p>
             </div>
-            <p>{overview}</p>
+            <p className="font-light text-sm text-gray-200 line-clamp-1">{overview}</p>
         </div>
+        <PlayVideoModal youtubeUrl={youtubeUrl} key={movieId} title={title} overview={overview} state={open} changeState={setOpen} age={age} duration={time} release={year}/>
     </>
     );
 };
